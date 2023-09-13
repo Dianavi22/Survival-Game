@@ -11,11 +11,16 @@ public class PickupBehaviour : MonoBehaviour
     [SerializeField]
     private MoveBehaviour playerMoveBehaviour;
 
+
     private Item _currentItem;
     public void DoPickup(Item item)
     {
-        _currentItem = item;
+        if (inventory.IsFull())
+        {
+            return;
+        }
 
+        _currentItem = item;
         playerAnimator.SetTrigger("Pickup");
         playerMoveBehaviour.canMove = false;
 
